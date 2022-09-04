@@ -1,7 +1,7 @@
 import './module'
 import './scss/index.scss'
 
-console.log("Index work")
+console.log('Index work')
 async function start() {
     return await Promise.resolve('async work !!!!!!!!!!!!')
 }
