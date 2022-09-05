@@ -3,26 +3,10 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production'
 const isDev = !isProd
-
-const jsLoaders = () => {
-    const loaders = [
-        {
-            loader: 'babel-loader',
-            options: {
-                presets: ['@babel/preset-env']
-            }
-        }
-    ]
-
-    if (isDev) {
-        loaders.push('eslint-loader')
-    }
-
-    return loaders
-}
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -45,10 +29,7 @@ module.exports = {
             directory: path.resolve(__dirname, 'dist'),
         },
         port: 3000,
-        open: true,
-        hot: true,
-        compress: true,
-        historyApiFallback: true,
+        hot: isDev,
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -69,7 +50,12 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'bundle.[hash].css'
-        })
+        }),
+        new EslintWebpackPlugin(
+            {
+                extensions: ['js']
+            }
+        )
     ],
     module: {
         rules: [
@@ -84,7 +70,12 @@ module.exports = {
             {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
-                use: jsLoaders()
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             }
         ],
     },
