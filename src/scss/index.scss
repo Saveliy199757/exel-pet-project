@@ -1,5 +1,17 @@
-$red: blue;
+@import "~normalize.css";
+
+@import "toolbar";
+@import "header";
+@import "formula";
+@import "table";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  background: $red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
 }
