@@ -15,97 +15,33 @@
 </head>
 <body>
   <div id="app" class="container">
-      <div class="excel">
-          <div class="excel__header">
-              <input type="text" class="input" value="Новая таблица">
-
-              <div>
-                  <div class="button">
-                      <span class="material-icons">logout</span>
-                  </div>
-                  <div class="button">
-                      <span class="material-icons">delete</span>
-                  </div>
+      <div class="dashboard">
+          <div class="dashboard__header">
+              <h1>Dashboard Excel</h1>
+          </div>
+          <div class="dashboard__create">
+              <div class="dashboard__container">
+                  <a href="#" class="dashboard__button">
+                      Новая таблица
+                  </a>
               </div>
           </div>
-          <div class="excel__toolbar">
-              <div class="button">
-                  <span class="material-icons">format_align_left</span>
-              </div>
-              <div class="button">
-                  <span class="material-icons">format_align_center</span>
-              </div>
-              <div class="button">
-                  <span class="material-icons">format_align_right</span>
-              </div>
-              <div class="button">
-                  <span class="material-icons">format_bold</span>
-              </div>
-              <div class="button">
-                  <span class="material-icons">format_italic</span>
-              </div>
-              <div class="button">
-                  <span class="material-icons">format_underline</span>
-              </div>
-          </div>
-          <div class="excel__formula">
-              <div class="icon">
-                 Fx
-              </div>
-
-              <div class="input" contenteditable spellcheck="false">
-
-              </div>
-
-          </div>
-          <div class="excel__table">
-             <div class="row">
-                 <div class="row-info">
-
-                 </div>
-                 <div class="row-data">
-                     <div class="column">
-                         A
-                     </div>
-                     <div class="column">
-                         B
-                     </div>
-                     <div class="column">
-                         C
-                     </div>
-                 </div>
-             </div>
-              <div class="row">
-                  <div class="row-info">
-                      1
+          <div class="dashboard__table">
+              <div class="dashboard__container">
+                  <div class="table__header">
+                      <span>Название</span>
+                      <span>Дата открытия</span>
                   </div>
-                  <div class="row-data">
-                      <div class="cell selected" contenteditable>
-                          1
-                      </div>
-                      <div class="cell" contenteditable>
-                          1
-                      </div>
-                      <div class="cell" contenteditable>
-                          1
-                      </div>
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="row-info">
-                      2
-                  </div>
-                  <div class="row-data">
-                      <div class="cell selected" contenteditable>
-                          1
-                      </div>
-                      <div class="cell" contenteditable>
-                          1
-                      </div>
-                      <div class="cell" contenteditable>
-                          1
-                      </div>
-                  </div>
+                  <ul class="table__list">
+                      <li class="record">
+                          <a href="#">Таблица номер 1</a>
+                          <strong>07.09.2022</strong>
+                      </li>
+                      <li class="record">
+                          <a href="#">Таблица номер 23</a>
+                          <strong>07.09.2022</strong>
+                      </li>
+                  </ul>
               </div>
           </div>
       </div>
