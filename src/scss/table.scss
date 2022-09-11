@@ -5,6 +5,7 @@
   position: absolute;
   top: $header-height + $toolbar-height + $formula-height;
   overflow-x: auto;
+  width: 100%;
   padding-bottom: 2px;
   .row {
     display: flex;
