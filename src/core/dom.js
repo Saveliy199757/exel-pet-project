@@ -32,6 +32,13 @@ class Dom {
         this.$el.removeEventListener(method, callback)
         return this
     }
+    closest(selector) {
+        return $(this.$el.closest(selector))
+    }
+    getCoords() {
+        // console.log('goords', this.$el.getBoundingClientRect()) дебаг
+        return this.$el.getBoundingClientRect()
+    }
 }
 export function $(selector) {
     return new Dom(selector)

@@ -4,15 +4,22 @@
 }
 
 function createRow(content, index) {
+    const resize = index ? `<div class="row-resize" data-resize="row"></div>` : ''
     return `<div class="row">
-                <div class="row-info">${index ? index : ''}</div>
+                <div class="row-info">
+                  ${index ? index : ''}
+                  ${resize}
+                </div>
                 <div class="row-data">${content}</div>
             </div>
            `
 }
 
 function createColl(contentColl) {
-    return `<div class="column">${contentColl}</div>`
+    return `<div class="column" data-type="resizeble">
+              ${contentColl}
+              <div class="col-resize" data-resize="col"></div>
+            </div>`
 }
 
 function createCell() {
