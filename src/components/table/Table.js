@@ -14,18 +14,27 @@ export class Table extends ExcelComponent {
         return createTable()
     }
     onMousedown(event) {
-        if (event.target.dataset) {
+        if (event.target.dataset.resize) {
             const $resizer = $(event.target)
             const $parent = $resizer.closest('[data-type="resizeble"]')
             const coords = $parent.getCoords()
+            const type = $resizer.data.resize
+            const cols = this.$root.findAll(`[data-key="${$parent.data.key}"]`)
             document.onmousemove = (e) => {
-                const delta = e.pageX - coords.right
-                $parent.$el.style.width = coords.width + delta + 'px'
+                if (type === 'col') {
+                    const delta = e.pageX - coords.right
+                    const valueResize = coords.width + delta
+                    $parent.$el.style.width = valueResize + 'px'
+                    cols.forEach((element) => element.style.width = valueResize + 'px')
+                } else {
+                    const delta = Math.floor(e.pageY - coords.bottom)
+                    const valueResize = coords.height + delta
+                    $parent.$el.style.height = valueResize + 'px'
+                }
             }
             document.onmouseup = () => {
                 document.onmousemove = null
             }
         }
-        console.log(event.target.dataset)
     }
 }

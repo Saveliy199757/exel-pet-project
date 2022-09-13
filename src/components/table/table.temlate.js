@@ -5,7 +5,7 @@
 
 function createRow(content, index) {
     const resize = index ? `<div class="row-resize" data-resize="row"></div>` : ''
-    return `<div class="row">
+    return `<div class="row" data-type="resizeble" >
                 <div class="row-info">
                   ${index ? index : ''}
                   ${resize}
@@ -15,15 +15,15 @@ function createRow(content, index) {
            `
 }
 
-function createColl(contentColl) {
-    return `<div class="column" data-type="resizeble">
+function createColl(contentColl, index) {
+    return `<div class="column" data-type="resizeble" data-key="${index}">
               ${contentColl}
               <div class="col-resize" data-resize="col"></div>
             </div>`
 }
 
-function createCell() {
-    return `<div class="cell" contenteditable></div>`
+function createCell(_, index) {
+    return `<div class="cell" contenteditable data-key="${index}"></div>`
 }
 
 function toChar(_, index) {
