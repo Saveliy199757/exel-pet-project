@@ -19,8 +19,9 @@
     bottom: 0;
     background: green;
     opacity: 0;
+    z-index: 1000;
     &:hover {
-      opacity: 1;
+      opacity: 1!important;
     }
   }
   .row-info {
