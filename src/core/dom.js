@@ -35,9 +35,15 @@ class Dom {
     closest(selector) {
         return $(this.$el.closest(selector))
     }
+    get data() {
+        return this.$el.dataset
+    }
     getCoords() {
         // console.log('goords', this.$el.getBoundingClientRect()) дебаг
         return this.$el.getBoundingClientRect()
+    }
+    findAll(selector) {
+        return this.$el.querySelectorAll(selector)
     }
 }
 export function $(selector) {
