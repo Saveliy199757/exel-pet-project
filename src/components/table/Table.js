@@ -1,6 +1,7 @@
 import {ExcelComponent} from '@core/ExcelComponent';
 import {createTable} from '@/components/table/table.temlate';
 import {resizeHandler} from '@/components/table/table.resize';
+import {TableSelection} from '@/components/table/TableSelection';
 
 export class Table extends ExcelComponent {
     constructor($root) {
@@ -13,6 +14,15 @@ export class Table extends ExcelComponent {
     toHTML() {
         return createTable()
     }
+    prepare() {
+        this.selection = new TableSelection()
+    }
+    init() {
+        super.init();
+        const $cell = this.$root.find('[data-id="0:0"]')
+        this.selection.select($cell)
+    }
+
     onMousedown(event) {
         if (event.target.dataset.resize) {
           resizeHandler(this.$root, event)
