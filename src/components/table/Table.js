@@ -3,13 +3,13 @@ import {$} from '@core/dom';
 import {createTable} from '@/components/table/table.temlate';
 import {resizeHandler} from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
-import {getMatrix, isCell, shouldResize} from '@/components/table/table.functions';
+import {getMatrix, isCell, nextSelectorCell, shouldResize} from '@/components/table/table.functions';
 
 export class Table extends ExcelComponent {
     constructor($root) {
         super($root, {
             name: 'Table',
-            listeners: ['mousedown']
+            listeners: ['mousedown', 'keydown']
         });
     }
     static className = 'excel__table'
@@ -37,6 +37,18 @@ export class Table extends ExcelComponent {
             } else {
                 this.selection.select($target)
             }
+        }
+    }
+    onKeydown(event) {
+        const keys = [
+            'Enter', 'Tab', 'ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'
+        ]
+        const {key} = event
+        if (keys.includes(event.key) && !event.shiftKey) {
+            event.preventDefault()
+            const currentId = this.selection.current.id(true)
+            const $next = this.$root.find(nextSelectorCell(key, currentId))
+            this.selection.select($next)
         }
     }
 }

@@ -52,6 +52,10 @@ class Dom {
         // console.log('goords', this.$el.getBoundingClientRect()) дебаг
         return this.$el.getBoundingClientRect()
     }
+    focus() {
+        this.$el.focus()
+        return this
+    }
     find(selector) {
        return $(this.$el.querySelector(selector))
     }

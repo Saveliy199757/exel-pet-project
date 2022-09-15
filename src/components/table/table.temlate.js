@@ -1,7 +1,4 @@
-const CODE = {
-    A: 65,
-    Z: 90
-}
+import {CODE, defaultRowsCount} from '@/components/table/table.constans';
 
 function createRow(content, index) {
     const resize = index ? `<div class="row-resize" data-resize="row"></div>` : ''
@@ -38,7 +35,7 @@ function toChar(_, index) {
      return String.fromCharCode(CODE.A + index)
 }
 
-export function createTable(rowsCount = 15) {
+export function createTable(rowsCount = defaultRowsCount) {
     const colsCount = CODE.Z - CODE.A + 1
     const rows = []
     const cols = new Array(colsCount)
