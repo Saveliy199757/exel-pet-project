@@ -24,7 +24,13 @@ function createColl(contentColl, index) {
 
 function createCell(row) {
     return function(_, col) {
-       return `<div class="cell" contenteditable data-key="${col}" data-id="${row}:${col}"></div>`
+       return `<div 
+                 class="cell"
+                 contenteditable
+                 data-key="${col}"
+                 data-type="cell"
+                 data-id="${row}:${col}">
+                 </div>`
     }
 }
 

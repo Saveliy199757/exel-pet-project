@@ -1,11 +1,22 @@
 export class TableSelection {
+    static className = 'selected'
     constructor() {
-        this.group = []
+        this.group = [];
+        this.current = null
     }
     select($el) {
+        this.clear()
         this.group.push($el)
-        $el.addClass('selected')
+        $el.addClass(TableSelection.className)
+        this.current = $el
     }
-    selectGroup() {
+    selectGroup($cellGroup = []) {
+        this.clear()
+        this.group = $cellGroup
+        this.group.forEach(($el) => $el.addClass(TableSelection.className))
+    }
+    clear() {
+        this.group.forEach(($el) => $el.removeClass(TableSelection.className) )
+        this.group = []
     }
 }

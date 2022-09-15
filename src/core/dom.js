@@ -38,6 +38,16 @@ class Dom {
     get data() {
         return this.$el.dataset
     }
+    id(parse) {
+        if (parse) {
+            const parse = this.id().split(':')
+            return {
+                row: +parse[0],
+                col: +parse[1]
+            }
+        }
+        return this.data.id
+    }
     getCoords() {
         // console.log('goords', this.$el.getBoundingClientRect()) дебаг
         return this.$el.getBoundingClientRect()
