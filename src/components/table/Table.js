@@ -6,13 +6,14 @@ import {TableSelection} from '@/components/table/TableSelection';
 import {getMatrix, isCell, nextSelectorCell, shouldResize} from '@/components/table/table.functions';
 
 export class Table extends ExcelComponent {
-    constructor($root) {
+    static className = 'excel__table'
+    constructor($root, options) {
         super($root, {
             name: 'Table',
-            listeners: ['mousedown', 'keydown']
+            listeners: ['mousedown', 'keydown'],
+            ...options
         });
     }
-    static className = 'excel__table'
     toHTML() {
         return createTable()
     }
@@ -23,6 +24,9 @@ export class Table extends ExcelComponent {
         super.init();
         const $cell = this.$root.find('[data-id="0:0"]')
         this.selection.select($cell)
+        this.emmiter.subscribe('Formula:text', (text) => {
+            this.selection.current.text(text)
+        })
     }
 
     onMousedown(event) {

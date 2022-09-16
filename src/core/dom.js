@@ -38,6 +38,9 @@ class Dom {
     get data() {
         return this.$el.dataset
     }
+    text(text) {
+        this.$el.textContent = text
+    }
     id(parse) {
         if (parse) {
             const parse = this.id().split(':')
