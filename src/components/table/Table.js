@@ -10,7 +10,7 @@ export class Table extends ExcelComponent {
     constructor($root, options) {
         super($root, {
             name: 'Table',
-            listeners: ['mousedown', 'keydown', 'input', 'click'],
+            listeners: ['mousedown', 'keydown', 'input'],
             ...options
         });
     }
@@ -31,11 +31,29 @@ export class Table extends ExcelComponent {
         this.$on('Formula:enter', () => {
             this.selection.current.focus()
         })
+        this.$subscribe((state) => {
+            console.log('TableState', state)
+        })
+    }
+
+    selectCell($cell) {
+        this.selection.select($cell)
+        this.$emmit('table:select', $cell)
+        this.$dispatch({ type: 'TEST' })
+    }
+    async resizeTable(event) {
+        try {
+            const data = await resizeHandler(this.$root, event)
+            console.log('data', data)
+            this.$dispatch({ type: 'COL_RESIZE', data })
+        } catch (e) {
+            console.warn(e.message)
+        }
     }
 
     onMousedown(event) {
         if (shouldResize(event)) {
-          resizeHandler(this.$root, event)
+          this.resizeTable(event)
         } else if (isCell(event)) {
             const $target = $(event.target)
             if (event.shiftKey) {
@@ -43,7 +61,7 @@ export class Table extends ExcelComponent {
                     .map((id) => this.$root.find(`[data-id="${id}"]`))
                 this.selection.selectGroup($selectedCells)
             } else {
-                this.selection.select($target)
+                this.selectCell($target)
             }
         }
     }
@@ -62,11 +80,5 @@ export class Table extends ExcelComponent {
     }
     onInput(event) {
         this.$emmit('Table:input', $(event.target))
-    }
-    onClick(event) {
-       const $target = $(event.target)
-        if ($target.data.type === 'cell') {
-            this.$emmit('table:select', $target)
-        }
     }
 }
