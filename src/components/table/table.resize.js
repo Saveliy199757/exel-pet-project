@@ -4,6 +4,7 @@ export function resizeHandler($root, event) {
     return new Promise((resolve) => {
         const $resizer = $(event.target)
         const $parent = $resizer.closest('[data-type="resizeble"]')
+        const id = $parent.data.key
         const coords = $parent.getCoords()
         const type = $resizer.data.resize
         const cols = $root.findAll(`[data-key="${$parent.data.key}"]`)
@@ -34,8 +35,9 @@ export function resizeHandler($root, event) {
                 $parent.css({height: valueResize + 'px'})
             }
             resolve({
-                width: valueResize,
-                id: type === 'col' ? $parent.data.key : null,
+                value: valueResize,
+                type,
+                id
             })
             $resizer.css({
                 opacity: 0,

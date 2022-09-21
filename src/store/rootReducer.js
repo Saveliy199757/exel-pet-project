@@ -1,11 +1,14 @@
+import {TABLE_RESIZE} from '@/store/types';
+
 export function rootReducer(state, action) {
     let prevState
+    let field
     switch (action.type) {
-        case 'COL_RESIZE':
-            console.log()
-            prevState = state.colState || {}
-            prevState[action.data.id] = action.data.width
-            return {...state, colState: prevState}
+        case TABLE_RESIZE:
+            field = action.data.type === 'col' ? 'colState' : 'rowState'
+            prevState = state[field] || {}
+            prevState[action.data.id] = action.data.value
+            return {...state, [field]: prevState}
         default: return state
     }
 }
