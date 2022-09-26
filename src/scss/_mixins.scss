@@ -9,7 +9,10 @@
   i {
     font-size: 18px;
   }
-  &:active,.active {
+  &:active {
+    color: $color;
+  }
+  &.active {
     color: $color;
   }
   &:hover {
