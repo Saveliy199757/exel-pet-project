@@ -33,6 +33,9 @@ export class Table extends ExcelComponent {
         this.$on('Formula:enter', () => {
             this.selection.current.focus()
         })
+        this.$on('Toolbar:applyStyle', (style) => {
+            this.selection.applyStyle(style)
+        })
     }
 
     selectCell($cell) {

@@ -83,6 +83,12 @@ class Dom {
             this.$el.style[key] = styles[key]
         })
     }
+    getStyles(styles = []) {
+        return styles.reduce((acc, style) => {
+            acc[style] = this.$el.style[style]
+            return acc
+        }, {})
+    }
 }
 export function $(selector) {
     return new Dom(selector)
