@@ -5,6 +5,7 @@ import {resizeHandler} from '@/components/table/table.resize';
 import {TableSelection} from '@/components/table/TableSelection';
 import {getMatrix, isCell, nextSelectorCell, shouldResize} from '@/components/table/table.functions';
 import * as actions from '@/store/actions'
+import {defaultStyles} from '@/constans';
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -41,6 +42,8 @@ export class Table extends ExcelComponent {
     selectCell($cell) {
         this.selection.select($cell)
         this.updateTextInStore($cell.text())
+        const styles = $cell.getStyles(Object.keys(defaultStyles))
+        this.$dispatch(actions.changeStyles(styles))
     }
     async resizeTable(event) {
         try {

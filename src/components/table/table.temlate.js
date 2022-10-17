@@ -1,4 +1,6 @@
 import {CODE, DEFAULT_HEIGHT_ROW, DEFAULT_WIDTH_CELL, defaultRowsCount} from '@/components/table/table.constans';
+import {defaultStyles} from '@/constans';
+import {camelToDashCase} from '@core/utils';
 
 function createRow(content, index, state) {
     const resize = index ? `<div class="row-resize" data-resize="row"></div>` : ''
@@ -26,13 +28,16 @@ function createCell(row, state) {
        const id = `${row}:${col}`
        const width = getWidthCell(state.colState, col)
        const content = state.cellText[id]
+       const styles = Object.keys(defaultStyles)
+           .map((key) => `${camelToDashCase(key)}: ${defaultStyles[key]}`)
+           .join(';')
        return `<div 
                  class="cell"
                  contenteditable
                  data-key="${col}"
                  data-type="cell"
                  data-id="${id}"
-                 style="width: ${width}"
+                 style="${styles}; width: ${width}"
                  >
                  ${content || ''}
                  </div>`
