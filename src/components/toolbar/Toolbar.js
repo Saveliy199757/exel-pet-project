@@ -33,7 +33,6 @@ export class Toolbar extends ExcelStateComponent {
             const value = JSON.parse($target.data.value)
             this.$emmit('Toolbar:applyStyle', value)
             this.setState(value)
-            console.log(this.state)
         }
     }
 }
