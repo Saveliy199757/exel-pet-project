@@ -36,12 +36,17 @@ export class Table extends ExcelComponent {
         })
         this.$on('Toolbar:applyStyle', (style) => {
             this.selection.applyStyle(style)
+            this.$dispatch(actions.applyStyle({
+                value: style,
+                ids: this.selection.selectedIds
+            }))
         })
     }
 
     selectCell($cell) {
         this.selection.select($cell)
         this.updateTextInStore($cell.text())
+        this.$emmit('table:select', $cell)
         const styles = $cell.getStyles(Object.keys(defaultStyles))
         this.$dispatch(actions.changeStyles(styles))
     }

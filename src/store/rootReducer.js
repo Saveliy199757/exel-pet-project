@@ -1,4 +1,4 @@
-import {CHANGE_STYLE, CHANGE_TEXT, TABLE_RESIZE} from '@/store/types';
+import {APPLY_STYLE, CHANGE_STYLES, CHANGE_TEXT, TABLE_RESIZE} from '@/store/types';
 
 export function rootReducer(state, action) {
     let prevState
@@ -13,8 +13,13 @@ export function rootReducer(state, action) {
             prevState = state['cellText'] || {}
             prevState[action.data.id] = action.data.value
             return {...state, currentText: action.data.value, cellText: prevState}
-        case CHANGE_STYLE:
+        case CHANGE_STYLES:
             return {...state, currentStyles: action.data}
+        case APPLY_STYLE:
+            field = 'stylesState'
+            return {
+                ...state,
+            }
         default: return state
     }
 }
