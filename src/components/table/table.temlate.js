@@ -1,6 +1,6 @@
 import {CODE, DEFAULT_HEIGHT_ROW, DEFAULT_WIDTH_CELL, defaultRowsCount} from '@/components/table/table.constans';
-import {defaultStyles} from '@/constans';
 import {toInlineStyles} from '@core/utils';
+import {defaultStyles} from '@/constans';
 
 function createRow(content, index, state) {
     const resize = index ? `<div class="row-resize" data-resize="row"></div>` : ''
@@ -28,7 +28,7 @@ function createCell(row, state) {
        const id = `${row}:${col}`
        const width = getWidthCell(state.colState, col)
        const content = state.cellText[id]
-       const styles = toInlineStyles(defaultStyles)
+       const styles = toInlineStyles({...defaultStyles, ...state.stylesState[id]})
        return `<div 
                  class="cell"
                  contenteditable
