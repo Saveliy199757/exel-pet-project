@@ -1,5 +1,5 @@
 import {CODE, DEFAULT_HEIGHT_ROW, DEFAULT_WIDTH_CELL, defaultRowsCount} from '@/components/table/table.constans';
-import {toInlineStyles} from '@core/utils';
+import {parse, toInlineStyles} from '@core/utils';
 import {defaultStyles} from '@/constans';
 
 function createRow(content, index, state) {
@@ -35,9 +35,10 @@ function createCell(row, state) {
                  data-key="${col}"
                  data-type="cell"
                  data-id="${id}"
+                 data-value="${content || ''}"
                  style="${styles}; width: ${width}"
                  >
-                 ${content || ''}
+                 ${parse(content) || ''}
                  </div>`
     }
 }

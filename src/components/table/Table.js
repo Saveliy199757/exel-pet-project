@@ -6,6 +6,7 @@ import {TableSelection} from '@/components/table/TableSelection';
 import {getMatrix, isCell, nextSelectorCell, shouldResize} from '@/components/table/table.functions';
 import * as actions from '@/store/actions'
 import {defaultStyles} from '@/constans';
+import {parse} from '@core/utils';
 
 export class Table extends ExcelComponent {
     static className = 'excel__table'
@@ -28,7 +29,7 @@ export class Table extends ExcelComponent {
         this.selection.select($cell)
         this.$emmit('table:select', $cell)
         this.$on('Formula:text', (text) => {
-            this.selection.current.text(text)
+            this.selection.current.attr('data-value', text).text(parse(text))
             this.updateTextInStore(text)
         })
         this.$on('Formula:enter', () => {
@@ -45,7 +46,7 @@ export class Table extends ExcelComponent {
 
     selectCell($cell) {
         this.selection.select($cell)
-        this.updateTextInStore($cell.text())
+        this.updateTextInStore($cell.data.value)
         this.$emmit('table:select', $cell)
         const styles = $cell.getStyles(Object.keys(defaultStyles))
         this.$dispatch(actions.changeStyles(styles))

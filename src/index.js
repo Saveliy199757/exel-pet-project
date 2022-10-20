@@ -6,14 +6,17 @@ import {Formula} from '@/components/formula/Formula';
 import {Table} from '@/components/table/Table';
 import {rootReducer} from '@/store/rootReducer';
 import {createStore} from '@/components/table/createStore';
-import {storage} from '@core/utils';
+import {debounce, storage} from '@core/utils';
 import {initialState} from '@/store/initialState';
 
 const store = createStore(rootReducer, initialState)
 
-store.subscribe((state) => {
+const stateListener = (state) => {
+    console.log('app', state)
     storage('excel-state', state)
-})
+}
+
+store.subscribe(debounce(stateListener, 300))
 
 const excel = new Excel('#app', {
     components: [Header, Toolbar, Formula, Table],
