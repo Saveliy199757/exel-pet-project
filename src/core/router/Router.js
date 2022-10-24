@@ -1,5 +1,4 @@
 import {$} from '@core/dom';
-import {ActiveRoute} from '@core/router/ActiveRoute';
 
 export class Router {
     constructor(selector, routes) {
@@ -7,7 +6,7 @@ export class Router {
             throw new Error('selector is not provided Router')
         }
         this.routes = routes
-        this.$appContainer = $(selector)
+        this.$tagContainer = $(selector)
         this.changePageHandler = this.changePageHandler.bind(this)
         this.init()
     }
@@ -16,8 +15,11 @@ export class Router {
         this.changePageHandler()
     }
     changePageHandler() {
-        console.log('hash change', ActiveRoute.path)
-        this.$appContainer.html('<h1>'+ActiveRoute.path+'</h1>')
+        const Page = this.routes.excel
+        const page = new Page('')
+        this.$tagContainer.append(page.getRoot())
+
+        page.afterRender()
     }
     destroy() {
         window.removeEventListener('hashchange', this.changePageHandler)
