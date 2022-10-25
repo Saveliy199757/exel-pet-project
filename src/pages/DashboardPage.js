@@ -3,13 +3,14 @@ import {$} from '@core/dom';
 
 export class DashboardPage extends Page {
     getRoot() {
-        $.create('div', 'dashboard').html(`
+        const now = Date.now().toString()
+       return $.create('div', 'dashboard').html(`
          <div class="dashboard__header">
-            <h1>Dashboard Excel</h1>
+            <h1>Панель Управления</h1>
         </div>
         <div class="dashboard__create">
             <div class="dashboard__container">
-                <a href="#" class="dashboard__button">
+                <a href="#/excel/${now}" class="dashboard__button">
                     Новая таблица
                 </a>
             </div>
