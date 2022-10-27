@@ -22,7 +22,7 @@ export class Router {
         }
         this.$tagContainer.clear()
         const Page = ActiveRoute.path.includes('excel') ? this.routes.excel : this.routes.dashboard
-        this.page = new Page()
+        this.page = new Page(ActiveRoute.param)
         this.$tagContainer.append(this.page.getRoot())
 
         this.page.afterRender()

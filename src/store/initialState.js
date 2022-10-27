@@ -1,4 +1,4 @@
-import {storage} from '@core/utils';
+import {clone} from '@core/utils';
 import {defaultStyles, defaultTitle} from '@/constans';
 
 const defaultState = {
@@ -11,4 +11,12 @@ const defaultState = {
     stylesState: {}
 }
 
-export const initialState = storage('excel-state') ? storage('excel-state') : defaultState
+const normalize = (state) => ({
+    ...state,
+    currentStyles: defaultStyles,
+    currentText: ''
+})
+
+export function normalizeInitialState(state) {
+    return state ? normalize(state) : clone(defaultState)
+}
