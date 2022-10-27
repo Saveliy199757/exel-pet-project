@@ -11,7 +11,7 @@ export class DashboardPage extends Page {
         </div>
         <div class="dashboard__create">
             <div class="dashboard__container">
-                <a href="#/excel/${now}" class="dashboard__button">
+                <a href="#excel/${now}" class="dashboard__button">
                     Новая таблица
                 </a>
             </div>

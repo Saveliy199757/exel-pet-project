@@ -1,7 +1,7 @@
 import {Page} from '@core/Page';
 import {createStore} from '@/components/table/createStore';
 import {rootReducer} from '@/store/rootReducer';
-import {initialState} from '@/store/initialState';
+import {normalizeInitialState} from '@/store/initialState';
 import {debounce, storage} from '@core/utils';
 import {Excel} from '@/components/excel/Excel';
 import {Header} from '@/components/header/Header';
@@ -9,13 +9,17 @@ import {Toolbar} from '@/components/toolbar/Toolbar';
 import {Formula} from '@/components/formula/Formula';
 import {Table} from '@/components/table/Table';
 
+function storageName(param) {
+    return 'excel:'+param
+}
+
 export class ExcelPage extends Page {
     getRoot() {
-        const store = createStore(rootReducer, initialState)
+        const state = storage(storageName(this.params))
+        const store = createStore(rootReducer, normalizeInitialState(state))
 
         const stateListener = (state) => {
-            console.log('app', state)
-            storage('excel-state', state)
+            storage(storageName(this.params), state)
         }
 
         store.subscribe(debounce(stateListener, 300))
