@@ -1,4 +1,4 @@
-import {APPLY_STYLE, CHANGE_STYLES, CHANGE_TEXT, CHANGE_TITLE, TABLE_RESIZE} from '@/store/types';
+import {APPLY_STYLE, CHANGE_STYLES, CHANGE_TEXT, CHANGE_TITLE, TABLE_RESIZE, UPDATE_DATE} from '@/store/types';
 
 export function rootReducer(state, action) {
     let prevState
@@ -29,6 +29,8 @@ export function rootReducer(state, action) {
             }
         case CHANGE_TITLE:
             return {...state, title: action.data}
+        case UPDATE_DATE:
+            return {...state, openedDate: new Date().toJSON()}
         default: return state
     }
 }

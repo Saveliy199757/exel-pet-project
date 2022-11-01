@@ -6,7 +6,10 @@ function toHtml(key) {
     return `
      <li class="record">
         <a href="#excel/${id}">${model.title}</a>
-        <strong>07.09.2022</strong>
+        <strong>
+        ${new Date(model.openedDate).toLocaleDateString()}
+        ${new Date(model.openedDate).toLocaleTimeString()}
+        </strong>
      </li>
     `
 }
