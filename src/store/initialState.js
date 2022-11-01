@@ -8,7 +8,8 @@ const defaultState = {
     cellText: {},
     currentText: '',
     currentStyles: defaultStyles,
-    stylesState: {}
+    stylesState: {},
+    openedDate: new Date().toJSON()
 }
 
 const normalize = (state) => ({
